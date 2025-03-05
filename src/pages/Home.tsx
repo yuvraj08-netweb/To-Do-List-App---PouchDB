@@ -1,7 +1,10 @@
+import TodoList from "../features/todos/TodoList"
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div className="w-full h-screen flex flex-col items-center justify-center">
+      <TodoList/>
+    </div>
   )
 }
 

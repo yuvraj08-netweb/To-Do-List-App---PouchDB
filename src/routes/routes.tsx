@@ -1,13 +1,16 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route,
+  //  Navigate
+   } from "react-router-dom";
 import Home from "../pages/Home";
 import NotFound from "../pages/NotFound";
 import Login from "../features/auth/Login";
 import Signup from "../features/auth/Signup";
-import { useAuthStore } from "../state/useAuthStore";
+// import { useAuthStore } from "../state/useAuthStore";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { user } = useAuthStore(); // Check if user is logged in
-  return user ? children : <Navigate to="/login" replace />;
+  // const { user } = useAuthStore(); // Check if user is logged in
+  // return user ? children : <Navigate to="/login" replace />;
+  return children;
 };
 
 const AppRoutes = () => {

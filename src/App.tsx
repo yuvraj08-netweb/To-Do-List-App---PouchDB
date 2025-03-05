@@ -1,8 +1,19 @@
-import "./App.css";
+import { useEffect } from "react";
+import AppRoutes from "./routes/routes";
+// import { syncWithSupabase, listenForRealtimeChanges } from "./features/sync/sync";
+import { useAuthStore } from "./state/useAuthStore";
 
-function App() {
+const App = () => {
+  const { user } = useAuthStore();
 
-  return <div className="App"></div>;
-}
+  useEffect(() => {
+    if (user) {
+      // syncWithSupabase(); // Sync data when user logs in
+      // listenForRealtimeChanges(); // Listen for realtime updates
+    }
+  }, [user]);
+
+  return <AppRoutes />;
+};
 
 export default App;
