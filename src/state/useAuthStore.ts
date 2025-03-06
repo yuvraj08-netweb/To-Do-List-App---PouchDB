@@ -1,19 +1,11 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import {
-  SupabaseClient,
-  createClient,
   User as SupabaseUser,
 } from "@supabase/supabase-js";
+import { supabase } from "../lib/supabase";
 
 // Initialize Supabase client
-const supabaseUrl = "https://your-supabase-url.supabase.co";
-const supabaseAnonKey = "your-anon-key";
-export const supabase: SupabaseClient = createClient(
-  supabaseUrl,
-  supabaseAnonKey
-);
-
 // Define user type
 interface User {
   id: string;
@@ -64,7 +56,7 @@ export const useAuthStore = create<AuthState>()(
       signup: async (email, password) => {
         set({ loading: true, error: null });
         const { data, error } = await supabase.auth.signUp({ email, password });
-
+        console.log(data,"data after signup")
         if (error) {
           set({ error: error.message, loading: false });
         } else {

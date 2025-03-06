@@ -1,7 +1,25 @@
 import { Input, Button, Form } from 'antd';
 import { Link } from 'react-router-dom';
+import { useForm } from 'antd/es/form/Form';
+import { useAuthStore } from '../../state/useAuthStore';
+
+export interface credentials {
+    email: string;
+    password: string;
+}
 
 const Signup = () => {
+  const [form] = useForm();
+  const {signup} = useAuthStore();
+
+ 
+  const onFinish = async (values : credentials) => {
+    console.log('Received values:', values);
+    const res = await signup(values.email,values.password);
+    console.log(res,"resresresrse")
+    // Handle signup logic here
+  };
+
   return (
     <div className="w-full h-screen flex justify-center items-center">
       <div className="max-w-lg w-full">
@@ -20,10 +38,10 @@ const Signup = () => {
 
             {/* Ant Design Form */}
             <Form
-              method="POST"
-              action="#"
+              form={form}
               layout="vertical"
               className="mt-8 space-y-6"
+              onFinish={onFinish}
             >
               {/* Email Field */}
               <Form.Item
@@ -45,13 +63,13 @@ const Signup = () => {
                 rules={[{ required: true, message: 'Please input your password!' }]}
               >
                 <Input
-                type='password'
-                 className='!bg-transparent !border-gray-800 !text-gray-700'
+                  type='password'
+                  className='!bg-transparent !border-gray-800 !text-gray-700'
                   placeholder="Password"
                 />
               </Form.Item>
 
-              {/* Sign In Button */}
+              {/* Sign Up Button */}
               <Form.Item>
                 <Button
                   type="primary"
@@ -64,10 +82,10 @@ const Signup = () => {
             </Form>
           </div>
 
-          {/* Sign up Link */}
+          {/* Login Link */}
           <div className="px-8 py-4 bg-gray-700 text-center">
             <span className="text-gray-400">Already have an account?</span>
-            <Link to={"/login"} className="font-medium text-[#AC5553] hover:text-indigo-400">
+            <Link to={'/login'} className="font-medium text-[#AC5553] hover:text-indigo-400">
               Login
             </Link>
           </div>

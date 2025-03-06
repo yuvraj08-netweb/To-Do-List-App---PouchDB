@@ -1,7 +1,20 @@
 import { Input, Checkbox, Button, Form } from "antd";
+import { useForm } from "antd/es/form/Form";
 import { Link } from "react-router-dom";
+import { credentials } from "./Signup";
+import { useAuthStore } from "../../state/useAuthStore";
 
 const Login = () => {
+  const [form] = useForm();
+  const {login} = useAuthStore();
+  
+  const onFinish = async (values: credentials) => {
+    console.log("Received values:", values);
+    const res = await login(values.email, values.password);
+    console.log(res, "resresresrse");
+    // Handle signup logic here
+  };
+
   return (
     <div className="w-full h-screen flex justify-center items-center">
       <div className="max-w-lg w-full">
@@ -22,10 +35,10 @@ const Login = () => {
 
             {/* Ant Design Form */}
             <Form
-              method="POST"
-              action="#"
+              form={form}
               layout="vertical"
               className="mt-8 space-y-6"
+              onFinish={onFinish}
             >
               {/* Email Field */}
               <Form.Item
