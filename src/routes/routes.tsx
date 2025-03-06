@@ -9,7 +9,7 @@ import NotFound from "../pages/NotFound";
 import Login from "../features/auth/Login";
 import Signup from "../features/auth/Signup";
 import { useAuthStore } from "../state/useAuthStore";
-import PublicLayout from "../layouts/publicLayout";
+import PublicLayout from "../layouts/PublicLayout";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuthStore(); // Check if user is logged in
